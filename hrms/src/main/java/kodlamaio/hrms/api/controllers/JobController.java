@@ -4,14 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.entities.concretes.Job;
 
 @RestController
-@RequestMapping("/api/jobs/")
+@RequestMapping("/api/jobs")
 public class JobController {
 	
 	private  final JobService jobService;
@@ -22,9 +24,19 @@ public class JobController {
 		this.jobService = jobService;
 	}
 	
-	@GetMapping("getall")
-	public List<Job> getAll(){
+	@GetMapping("/getall")
+	public DataResult<List<Job>>  getAll(){
 		return jobService.getAll();
 	}
+	@PostMapping("/add")
+	public void add(Job job) {
+		jobService.add(job);
+	}
+	@PostMapping("/delete")
+	public void delete(Job job) {
+		jobService.delete(job);
+	}
+
+		
 
 }
