@@ -1,11 +1,13 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,9 +34,10 @@ public class Candidate extends User {
 	
 	
 	@Column(name="birth_date")
-	private LocalDate dateOfBrith;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dateOfBrith;
 	
-	public Candidate(String email, String password, String firstName, String lastName, String nationalId, LocalDate dateOfBirth) {
+	public Candidate(String email, String password, String firstName, String lastName, String nationalId, Date dateOfBirth) {
         super(email, password);
         this.firstName = firstName;
         this.lastName = lastName;

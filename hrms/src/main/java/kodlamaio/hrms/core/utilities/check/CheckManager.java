@@ -34,6 +34,7 @@ public class CheckManager implements CheckService {
 	public String produceCheckCode() {
 		int result= random.nextInt(High-Low)+Low;
 		String resultt = String.valueOf(result);
+		System.out.println(resultt);
 		// emaile loglanma kodu bulunacak
 		return resultt;
 	}
@@ -42,7 +43,8 @@ public class CheckManager implements CheckService {
 	@Override
 	public boolean checkwithhrms() {
 		
-		return false;
+		return true;
+		
 	}
 	
 }

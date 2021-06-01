@@ -29,7 +29,7 @@ public class UserManager implements UserService{
 
 	@Override
 	public DataResult<List<User>>  getAll() {
-		return new ErrorDataResult<List<User>>( userDao.findAll(),"sda");
+		return new SuccessDataResult<List<User>>( userDao.findAll(),"data getirildi");
 		
 	}
 
@@ -47,10 +47,7 @@ public class UserManager implements UserService{
 	}
 
 
-	@Override
-	 public DataResult<List<User>> getByEmail(String email) {
-	        return new SuccessDataResult<List<User>>(this.userDao.findByEmailContaining(email));
-	    }
+
 	
 
 
@@ -64,12 +61,17 @@ public class UserManager implements UserService{
 	public Result checkUserExitsByEmail(String email) {
 
         var userEmail = getByEmail(email);
-        if(userEmail.getData() !=null){
+        if(userEmail.equals(null)){
            return new ErrorResult("This email address has been used before.");
         }
 
         return new SuccessResult();
     }
+
+	@Override
+	public DataResult<User> getByEmail(String email) {
+		return new SuccessDataResult<User>(userDao.getByEmail(email));
+	}
 	}
 
 

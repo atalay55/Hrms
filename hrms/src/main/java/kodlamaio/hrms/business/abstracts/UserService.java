@@ -8,6 +8,6 @@ import kodlamaio.hrms.entities.concretes.User;
 
 public interface UserService extends BaseService<User> {
 
-	DataResult<List<User>> getByEmail(String email);
+	DataResult<User> getByEmail(String email);
 	Result checkUserExitsByEmail(String email);
 }

@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @Entity
 @NoArgsConstructor
 @Table(name="activation_code_to_candidates")

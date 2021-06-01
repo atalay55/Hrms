@@ -11,24 +11,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
-@Data
 @Entity
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-@Table(name="job_titles")
-public class Job {
-
+@NoArgsConstructor
+@Table(name="citys")
+public class City {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="title")
-	private String title;
-	
-	public Job(String title) {
-		this.title=title;
-	}
+	@Column(name="city_name")
+	private String cityName;
+
 }

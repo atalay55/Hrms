@@ -10,7 +10,6 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.core.adaptor.check.MernisCheckService;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
-import kodlamaio.hrms.core.utilities.check.CheckService;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
@@ -32,7 +31,6 @@ public class AuthManager implements AuthService {
 	private UserService userService;
 	private MernisCheckService mernischeckService;
 	private EmployerService employerService;
-	private CheckService checkService;
 	private ActivationCodeDao activationCodeDao;
 	private ActivationCodeForCandidateDao codeForCandidateDao;
 	private ActivationCodeForEmployer codeForEmployer;
@@ -44,12 +42,12 @@ public class AuthManager implements AuthService {
 
 	@Autowired
 	public AuthManager(MernisCheckService mernischeckService,UserService userService,ActivationCodeDao activationCodeDao,EmployerService employerService,
-		CheckService checkService,CandidateService candidateService,ActivationCodeForCandidateDao codeForCandidateDao,ActivationCodeForEmployer codeForEmployer) {
+		CandidateService candidateService,ActivationCodeForCandidateDao codeForCandidateDao,ActivationCodeForEmployer codeForEmployer) {
 		this.mernischeckService=mernischeckService;
 		this.userService=userService;
 		this.activationCodeDao=activationCodeDao;
 		this.employerService=employerService;
-		this.checkService=checkService;
+	
 		this.candidateService=candidateService;
 		this.codeForCandidateDao=codeForCandidateDao;
 		this.codeForEmployer=codeForEmployer;
@@ -69,28 +67,34 @@ public class AuthManager implements AuthService {
 		        return new ErrorResult(checkUserEntry.getMessage());
 		    }
 		 if(this.mernischeckService.checkIfRealPerson(candidateDto).isSuccess()) {
-		 Candidate candidateInfo = new Candidate(candidateDto.getEmail(),candidateDto.getPassWord(),candidateDto.getFirstName(),candidateDto.getLastName(),
-				 candidateDto.getIdentityNu(),candidateDto.getDateOfBrith());
-		 String checkCode=checkService.produceCheckCode();
+		 Candidate candidateInfo = new Candidate(candidateDto.getFirstName(),candidateDto.getLastName(),candidateDto.getIdentityNu(),
+				 candidateDto.getDateOfBrith());
+		 System.out.println(candidateInfo.getFirstName());
+		 //String checkCode=checkService.produceCheckCode();
 		 
 		 
-		 if(this.checkService.checkwithCode(checkCode)) {
-			 ActivationCode code = new ActivationCode(checkCode,true);
-			 ActivationCodeToCandidate candidatecode = new ActivationCodeToCandidate(candidateInfo.getId());
-			 this.activationCodeDao.save(code);
-			 this.codeForCandidateDao.save(candidatecode);
-			 this.candidateService.add(candidateInfo);
+//		 if(false) {
+//			 ActivationCode code = new ActivationCode(true);
+//			 ActivationCodeToCandidate candidatecode = new ActivationCodeToCandidate(candidateInfo.getId());
+//			 this.activationCodeDao.save(code);
+//			 this.codeForCandidateDao.save(candidatecode);
+//			 this.candidateService.add(candidateInfo);
+//			 
+//			 return new SuccessResult("Candidate is successfully registered.");}
+		 		if(true) {
+		 			candidateService.add(candidateInfo);
 			 
-			 return new SuccessResult("Candidate is successfully registered.");}
-		 else if(this.checkService.checkwithhrms()) {
-			 candidateService.add(candidateInfo);
+		 			return new SuccessResult("Candidate is successfully registered.");}}
+		 
+		
 			 
-			 return new SuccessResult("Candidate is successfully registered.");}
-		 }
+		 return new ErrorResult( "operation failed");
+		 
+		 
 		 
 		    
 
-		 return new ErrorResult( "operation failed");
+		
 	}
 						
 
@@ -106,21 +110,21 @@ public class AuthManager implements AuthService {
 
 	        Employer infoEmployer= new Employer(employerDto.getCompanyName(),employerDto.getWebSite(),employerDto.getPhoneNumber(),false);
 	        
-	        String checkCode=checkService.produceCheckCode();
+	        //String checkCode=checkService.produceCheckCode();
 			 
 			 
-			 if(this.checkService.checkwithCode(checkCode)) {
-				 ActivationCode code = new ActivationCode(checkCode,true);
-				 ActivationCodeToEmployer employerCode = new ActivationCodeToEmployer(infoEmployer.getId());
-				 this.activationCodeDao.save(code);
-				 this.codeForEmployer.save(employerCode);
-				 infoEmployer.setActivated(true);
-			     this.employerService.add(infoEmployer);
-			     return new SuccessResult("Employer is successfully registered.");
-			 
-			 
-			 }
-			 else if(this.checkService.checkwithhrms()) {
+//			 if(this.checkService.checkwithCode(checkCode)) {
+//				 ActivationCode code = new ActivationCode(checkCode,true);
+//				 ActivationCodeToEmployer employerCode = new ActivationCodeToEmployer(infoEmployer.getId());
+//				 this.activationCodeDao.save(code);
+//				 this.codeForEmployer.save(employerCode);
+//				 infoEmployer.setActivated(true);
+//			     this.employerService.add(infoEmployer);
+//			     return new SuccessResult("Employer is successfully registered.");
+//			 
+//			 
+//			 }
+			 if(true) {
 				 
 			        this.employerService.add(infoEmployer);
 			        return new SuccessResult("Employer is successfully registered.");

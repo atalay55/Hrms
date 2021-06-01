@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,17 +14,14 @@ import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.entities.concretes.Candidate;
 
 
-public class CandidateController {
-	
-	
 	@RestController
 	@RequestMapping("/api/candidates")
-	public class EmployeeController {
+	public class CandidateController {
 		
 		private CandidateService candidateService;
 
 		@Autowired
-		public EmployeeController(CandidateService candidateService) {
+		public CandidateController(CandidateService candidateService) {
 			super();
 			this.candidateService = candidateService;
 		}
@@ -33,16 +31,14 @@ public class CandidateController {
 			return candidateService.getAll();
 		}
 		
-		@PostMapping("/add")
-		public void add(Candidate candidate){
+		@PostMapping("/addcandidate")
+		public void add(@RequestBody Candidate candidate){
 			candidateService.add(candidate);
 		}
-		@PostMapping("/delete")
-		public void delete(Candidate candidate) {
+		@PostMapping("/deletecandidate")
+		public void delete(@RequestBody Candidate candidate) {
 			candidateService.delete(candidate);
 		}
 		
 	}
 
-}
-	

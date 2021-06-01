@@ -2,7 +2,9 @@ package kodlamaio.hrms.api.controllers;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,16 +20,17 @@ public class AuthController {
 	
 	private AuthService authService;
 	
+	@Autowired
 	public AuthController(AuthService authService) {
 		this.authService=authService;
 	}
 
 	@PostMapping("/registercandidate")
-	public Result register(CandidateDto candidateDto) {
+	public Result register(@RequestBody CandidateDto candidateDto) {
 		return this.authService.addCandidate(candidateDto);
 	}
 	@PostMapping("/registeremployer")
-	public Result register(EmployerDto employerDto) {
+	public Result register(@RequestBody EmployerDto employerDto) {
 		return this.authService.registerForEmployer(employerDto);
 	}
 

@@ -9,26 +9,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.UserService;
+import kodlamaio.hrms.business.abstracts.CityService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
-import kodlamaio.hrms.entities.concretes.User;
+
+import kodlamaio.hrms.entities.concretes.City;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+@RequestMapping("/api/cities")
+public class CityController {
 	
-	UserService userService;
+	private CityService cityService;
 
 	@Autowired
-	public UserController(UserService userService) {
+	public CityController(CityService cityService) {
 		super();
-		this.userService = userService;
+		this.cityService = cityService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<User> > getAll(){
-		return userService.getAll();
+	public DataResult<List<City> > getAll(){
+		return cityService.getAll();
 	}
 	
-
+	@PostMapping("/addcity")
+	public void add(@RequestBody City city){
+		this.cityService.add(city);
+	}
+	@PostMapping("/deletecity")
+	public void delete(@RequestBody City city) {
+		this.cityService.delete(city);
+	}
+	
 }
+

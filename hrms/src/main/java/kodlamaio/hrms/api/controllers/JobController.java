@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +30,11 @@ public class JobController {
 		return jobService.getAll();
 	}
 	@PostMapping("/add")
-	public void add(Job job) {
+	public void add(@RequestBody Job job) {
 		jobService.add(job);
 	}
 	@PostMapping("/delete")
-	public void delete(Job job) {
+	public void delete(@RequestBody Job job) {
 		jobService.delete(job);
 	}
 

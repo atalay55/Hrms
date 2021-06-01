@@ -1,8 +1,8 @@
 package kodlamaio.hrms.core.adaptor.check.mernis;
 
 
+import java.sql.Date;
 
-import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
@@ -70,15 +70,12 @@ public class MernisCheckManager implements MernisCheckService {
         return new SuccessResult("Last Name is validated.");
     }
 
-    private Result checkBirthOfDate(LocalDate birthOfDate){
+    private Result checkBirthOfDate(Date date){
 
-        if(birthOfDate ==null){
+        if(date ==null){
             return new ErrorResult("Field Birth of Date cannot be blank ");
         }
 
-        if (birthOfDate.isAfter(LocalDate.now())){
-            return new ErrorResult("Date of Birth must be before today");
-        }
 
         return new SuccessResult("Birth of date validated.");
     }
