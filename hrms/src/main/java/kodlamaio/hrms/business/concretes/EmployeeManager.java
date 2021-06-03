@@ -29,20 +29,20 @@ private EmployeeDao employeeDao;
 	}
 	@Override
 	public DataResult<List<Employee>>  getAll() {
-		return  new SuccessDataResult<List<Employee>>( employeeDao.findAll());
+		return  new SuccessDataResult<List<Employee>>( employeeDao.findAll(),"listted employee");
 	
 	}
 	@Override
 	public Result add(Employee item) {
 		employeeDao.save(item);
-		return new SuccessResult();
+		return new SuccessResult("added employee");
 		
 		
 	}
 	@Override
 	public Result delete(Employee item) {
 		employeeDao.delete(item);
-		return new SuccessResult();
+		return new SuccessResult("deleted employee");
 	}
 
 

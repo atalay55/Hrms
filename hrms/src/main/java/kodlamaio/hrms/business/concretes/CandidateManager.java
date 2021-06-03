@@ -23,10 +23,12 @@ public class CandidateManager implements CandidateService{
 	public  CandidateManager(CandidateDao candidateDao) {
 		super();
 		this.candidateDao=candidateDao;
+		
 	}
 
 	@Override
 	public Result add(Candidate item) {
+		
 		candidateDao.save(item);
 		return new SuccessResult();
 		

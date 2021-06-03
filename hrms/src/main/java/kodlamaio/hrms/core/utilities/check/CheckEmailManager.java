@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.database.abstracts.ActivationCodeDao;
 
 @Service
-public class CheckManager implements CheckService {
+public class CheckEmailManager implements CheckEmailService {
 
 	Random random ;
 	ActivationCodeDao activationCode;
@@ -16,7 +16,7 @@ public class CheckManager implements CheckService {
 	private int Low =1000;
 	
 	@Autowired
-	public CheckManager(ActivationCodeDao activationCode) {
+	public CheckEmailManager(ActivationCodeDao activationCode) {
 		
 		this.activationCode=activationCode;
 	}

@@ -1,6 +1,6 @@
 package kodlamaio.hrms.core.utilities.check;
 
-public interface CheckService {
+public interface CheckEmailService {
 	boolean checkwithCode(String code);
 	String produceCheckCode();
 	boolean checkwithhrms();

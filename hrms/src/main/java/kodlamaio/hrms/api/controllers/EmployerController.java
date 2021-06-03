@@ -10,34 +10,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.EmployeeService;
+import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.entities.concretes.Employee;
+import kodlamaio.hrms.entities.concretes.Employer;
 
 
 @RestController
-@RequestMapping("/api/employees")
-public class EmployeeController {
+@RequestMapping("/api/employer")
+public class EmployerController {
 	
-	private EmployeeService employeeService;
+	private EmployerService employerService;
 
 	@Autowired
-	public EmployeeController(EmployeeService employeeService) {
+	public EmployerController(EmployerService employerService) {
 		super();
-		this.employeeService = employeeService;
+		this.employerService = employerService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Employee>>  getAll(){
-		return employeeService.getAll();
+	public DataResult<List<Employer>>  getAll(){
+		return this.employerService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody Employee employee){
-		employeeService.add(employee);
+	public void add(@RequestBody Employer employer){
+		this.employerService.add(employer);
 	}
 	@PostMapping("/delete")
-	public void delete(@RequestBody Employee employee) {
-		employeeService.delete(employee);
+	public void delete(@RequestBody Employer employer) {
+		this.employerService.delete(employer);
 	}
 
 	

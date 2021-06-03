@@ -27,21 +27,22 @@ public class EmployerManager implements EmployerService{
 	
 	@Override
 	public Result add(Employer item) {
+		System.out.println(item);
 		employerDao.save(item);
-		return new SuccessResult();
+		return new SuccessResult("added employer");
 	}
 
 	@Override
 	public Result delete(Employer item) {
 		employerDao.delete(item);
-		return new SuccessResult();
+		return new SuccessResult("deleted employer");
 	}
 
 	@Override
 	public DataResult<List<Employer>> getAll() {
-		return new SuccessDataResult<List<Employer>>(employerDao.findAll());
+		return new SuccessDataResult<List<Employer>>(employerDao.findAll(),"listted employer");
 	}
-
+	
 
 	
 	

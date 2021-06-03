@@ -29,6 +29,15 @@ public class Employer  extends User{
 	@Column(name="is_activated")
 	private boolean isActivated;
 
+	public Employer(String email, String password, String companyName, String webSite, String phoneNumber,
+			boolean isActivated) {
+		super(email, password);
+		this.companyName = companyName;
+		this.webSite = webSite;
+		this.phoneNumber = phoneNumber;
+		this.isActivated = isActivated;
+	}
+
 
 
 }

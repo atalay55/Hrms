@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import kodlamaio.hrms.entities.concretes.Candidate;
 
 public interface CandidateDao extends JpaRepository<Candidate, Integer> {
-	Candidate findByIdentityNuContaining(String nationalId);
+	Candidate getByIdentityNuContaining(String nationalId);
 }

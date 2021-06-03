@@ -32,7 +32,7 @@ public class MernisCheckManager implements MernisCheckService {
 
     private Result checkNationalId(String nationalId){
 
-        if(nationalId ==null){
+        if(nationalId.equals(null)){
             return new ErrorResult("Field National Id cannot be blank ");
         }
 
@@ -46,7 +46,7 @@ public class MernisCheckManager implements MernisCheckService {
 
     private Result checkFirstName(String firstName){
 
-        if(firstName ==null){
+        if(firstName.equals(null)){
             return new ErrorResult("Field First Name cannot be blank ");
         }
 
@@ -59,7 +59,7 @@ public class MernisCheckManager implements MernisCheckService {
 
     private Result checkLastName(String lastName){
 
-        if(lastName ==null){
+        if(lastName.equals(null)){
             return new ErrorResult("Field Last Name cannot be blank ");
         }
 

@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +24,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="users")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisement"})
+
 public class User {
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="user_id")
+	private int userId;
 	
 	@Column(name="email")
 	private String email;
@@ -35,10 +40,14 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	private String passWordConf;
+	
 
 	
 	public User(String email,String passWord) {
 		this.email= email;
 		this.password= passWord;
 	}
+	
+
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Optional;
+
 import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorDataResult;
@@ -60,18 +62,12 @@ public class UserManager implements UserService{
 	@Override
 	public Result checkUserExitsByEmail(String email) {
 
-        var userEmail = getByEmail(email);
-        if(userEmail.equals(null)){
-           return new ErrorResult("This email address has been used before.");
+        boolean userEmail = this.userDao.getByEmail(email).isPresent();
+        if(userEmail==true) {
+        	return new ErrorResult("bu email kullanılmıs");
         }
-
-        return new SuccessResult();
+       return new SuccessResult();
     }
 
-	@Override
-	public DataResult<User> getByEmail(String email) {
-		return new SuccessDataResult<User>(userDao.getByEmail(email));
-	}
-	}
 
-
+}
